@@ -100,36 +100,48 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ioQ-K1-zmw">
-                                <rect key="frame" x="8" y="96" width="177" height="58"/>
+                                <rect key="frame" x="8" y="96" width="359" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="P7D-sk-5Xy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="yes"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Wtb-Ha-cPN" id="g61-h8-HJw"/>
+                                </connections>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Detail" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="odP-yM-gaZ">
-                                <rect key="frame" x="8" y="174" width="177" height="128"/>
+                                <rect key="frame" x="8" y="174" width="359" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="ueG-Bm-sPw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Wtb-Ha-cPN" id="idB-6t-Sqj"/>
+                                </connections>
                             </textView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vlM-Yx-Jxy">
-                                <rect key="frame" x="8" y="322" width="177" height="34"/>
+                                <rect key="frame" x="8" y="322" width="359" height="34"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Wtb-Ha-cPN" id="E0b-Od-9E9"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date and Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8hN-od-G1d">
-                                <rect key="frame" x="8" y="376" width="177" height="34"/>
+                                <rect key="frame" x="8" y="376" width="359" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="207.33000000000001" id="kIx-uH-C7Y"/>
+                                    <constraint firstAttribute="width" constant="359" id="g5X-RB-4mt"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Wtb-Ha-cPN" id="ReN-fF-aRu"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
-class AddTaskViewController: UIViewController {
+class AddTaskViewController: UIViewController,UITextFieldDelegate,UITextViewDelegate{
     
     weak var delegate: ToDoCellAddTaskDelegate?
+    
+    var container: NSPersistentContainer? =
+        (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+
     
     var todoTaskCreated: ToDoTask?
     
@@ -20,6 +25,7 @@ class AddTaskViewController: UIViewController {
     @IBOutlet weak var taskDetail: UITextView!
     @IBOutlet weak var taskLocation: UITextField!
     @IBOutlet weak var taskDate: UITextField!
+    
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
@@ -33,14 +39,22 @@ class AddTaskViewController: UIViewController {
          let taskTitleString = taskTitle.text!
          let taskDetailString = taskDetail.text!
          let taskLocationString = taskLocation.text!
-        let taskDateString = taskDate.text!
+         let taskDateString = taskDate.text!
         
+        let todoTask = ToDoTask(title: taskTitleString, detail: taskDetailString, location: taskLocationString, date: taskDateString)
+        updateDatabase(with: todoTask)
         
-        delegate?.didFinishedAdding(ToDoTask(title: taskTitleString, detail: taskDetailString, location: taskLocationString, date: taskDateString))
+//        delegate?.didFinishedAdding(ToDoTask(title: taskTitleString, detail: taskDetailString, location: taskLocationString, date: taskDateString))
         presentingViewController?.dismiss(animated: true)
         //     NotificationCenter.default.post(name: NSNotification.Name.init("didFinishedAdding"), object: "")
     }
     
+    private func updateDatabase(with todoTask: ToDoTask){
+        container?.performBackgroundTask{ context in
+            _ = Todo.createTodoTask(with: todoTask, in: context)
+            try? context.save()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,10 +63,38 @@ class AddTaskViewController: UIViewController {
         self.navigationItem.title = "Add To-Do"
         datePicker.datePickerMode = UIDatePickerMode.dateAndTime
         taskDate.inputView = datePicker
+        taskDate.inputAccessoryView = UIToolbar().ToolbarPicker(select: #selector(dismissPicker))
         
         datePicker.addTarget(self, action: #selector(datePicKChanged(_:)), for: UIControlEvents.valueChanged)
     }
 
+
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        let nextTag = textField.tag + 1
+//
+//        if let nextResponder = textField.superview?.viewWithTag(nextTag) {
+//            nextResponder.becomeFirstResponder()
+//        } else {
+//            textField.resignFirstResponder()
+//        }
+//
+//        return true
+//    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == taskTitle {
+            textField.resignFirstResponder()
+            taskDetail.becomeFirstResponder()
+        }else if textField == taskLocation {
+            textField.resignFirstResponder()
+            taskDate.becomeFirstResponder()
+        }else if textField == taskDate {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    
    
     func updateViews() {
         if taskTitle != nil , taskDetail != nil , taskLocation != nil {
@@ -87,18 +129,27 @@ class AddTaskViewController: UIViewController {
         taskDate.text = string
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    @objc func dismissPicker() {
+        view.endEditing(true)
+    }
     
 }
 
 protocol ToDoCellAddTaskDelegate: class {
     func didFinishedAdding(_ todoTask: ToDoTask) -> Void
+}
+
+extension UIToolbar {
+    func ToolbarPicker(select: Selector) -> UIToolbar {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = UIBarStyle.default
+        toolbar.isTranslucent = true
+        toolbar.tintColor = .black
+        toolbar.sizeToFit()
+        let doneBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: select)
+        toolbar.setItems([doneBtn], animated: true)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }
 }

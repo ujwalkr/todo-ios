@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class MainViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, ToDoCellAddTaskDelegate{
+class MainViewController: UIViewController, UITableViewDelegate,UITableViewDataSource,ToDoCellAddTaskDelegate {
     
     func didFinishedAdding(_ todoTask: ToDoTask) {
         todoTasks += [todoTask]
@@ -17,6 +18,11 @@ class MainViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     
     
     var todoTasks = [ToDoTask]()
+    
+    var container: NSPersistentContainer? =
+        (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+    
+    var fetchedResultController: NSFetchedResultsController<Todo>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +82,7 @@ class MainViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let vw = UILabel()
-            vw.text = "Section 1"
+            vw.text = "Section 0"
             return vw
         }else{
             let vw = UILabel()
@@ -98,10 +104,6 @@ class MainViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         }
     }
     
-//    @objc
-//    func refresh(notification: Notification) {
-//          print(notification.object)
-//    }
 }
 extension UITableView{
     //    MARK: - assign and reset tableView for empty cell

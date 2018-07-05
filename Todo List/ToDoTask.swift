@@ -20,4 +20,15 @@ struct ToDoTask {
         self.location = location
         self.date = date
     }
+    
+}
+
+extension String {
+    
+    func convertToDate() -> Date{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd , hh:mm:ss"
+        let date = dateFormatter.date(from: self)
+        return date!
+    }
 }
