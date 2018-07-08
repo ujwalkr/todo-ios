@@ -9,7 +9,13 @@
 /* Begin PBXBuildFile section */
 		84042D4920ED0A3200CB7530 /* TodoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84042D4720ED0A3200CB7530 /* TodoModel.xcdatamodeld */; };
 		84042D6C20ED62C700CB7530 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84042D6B20ED62C700CB7530 /* Todo.swift */; };
-		84042D6E20ED653100CB7530 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84042D6D20ED653100CB7530 /* TweetViewController.swift */; };
+		84042D7120EE5D9700CB7530 /* Contacts+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84042D7020EE5D9700CB7530 /* Contacts+Extension.swift */; };
+		84042D7320EE5DAD00CB7530 /* Attachment+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84042D7220EE5DAD00CB7530 /* Attachment+Extension.swift */; };
+		84042D7620EE611200CB7530 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84042D7520EE611200CB7530 /* ContactsViewController.swift */; };
+		84042D7820EEA07900CB7530 /* AttachmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84042D7720EEA07800CB7530 /* AttachmentCollectionViewCell.swift */; };
+		844EB9E820F24C8900C30393 /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EB9E620F24C8900C30393 /* FormTableViewCell.swift */; };
+		844EB9E920F24C8900C30393 /* FormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844EB9E720F24C8900C30393 /* FormTableViewCell.xib */; };
+		844EB9EB20F24D2900C30393 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EB9EA20F24D2900C30393 /* ProfileViewController.swift */; };
 		8476C97620EA8CD9002E5063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476C97520EA8CD9002E5063 /* AppDelegate.swift */; };
 		8476C97820EA8CD9002E5063 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476C97720EA8CD9002E5063 /* MainViewController.swift */; };
 		8476C97B20EA8CD9002E5063 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8476C97920EA8CD9002E5063 /* Main.storyboard */; };
@@ -23,7 +29,13 @@
 /* Begin PBXFileReference section */
 		84042D4820ED0A3200CB7530 /* TodoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoModel.xcdatamodel; sourceTree = "<group>"; };
 		84042D6B20ED62C700CB7530 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
-		84042D6D20ED653100CB7530 /* TweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
+		84042D7020EE5D9700CB7530 /* Contacts+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contacts+Extension.swift"; sourceTree = "<group>"; };
+		84042D7220EE5DAD00CB7530 /* Attachment+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attachment+Extension.swift"; sourceTree = "<group>"; };
+		84042D7520EE611200CB7530 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		84042D7720EEA07800CB7530 /* AttachmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentCollectionViewCell.swift; sourceTree = "<group>"; };
+		844EB9E620F24C8900C30393 /* FormTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
+		844EB9E720F24C8900C30393 /* FormTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormTableViewCell.xib; sourceTree = "<group>"; };
+		844EB9EA20F24D2900C30393 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8476C97220EA8CD9002E5063 /* Todo List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Todo List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8476C97520EA8CD9002E5063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8476C97720EA8CD9002E5063 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +59,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84042D6F20EE5D7900CB7530 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				84042D6B20ED62C700CB7530 /* Todo.swift */,
+				84042D7020EE5D9700CB7530 /* Contacts+Extension.swift */,
+				84042D7220EE5DAD00CB7530 /* Attachment+Extension.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		84042D7420EE60F800CB7530 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8476C97720EA8CD9002E5063 /* MainViewController.swift */,
+				8476C98A20EAA31A002E5063 /* AddTaskViewController.swift */,
+				84042D7520EE611200CB7530 /* ContactsViewController.swift */,
+				844EB9EA20F24D2900C30393 /* ProfileViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		844EB9E520F24C6300C30393 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				844EB9E620F24C8900C30393 /* FormTableViewCell.swift */,
+				844EB9E720F24C8900C30393 /* FormTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		8476C96920EA8CD8002E5063 = {
 			isa = PBXGroup;
 			children = (
@@ -66,12 +108,12 @@
 		8476C97420EA8CD9002E5063 /* Todo List */ = {
 			isa = PBXGroup;
 			children = (
-				8476C97720EA8CD9002E5063 /* MainViewController.swift */,
-				84042D6D20ED653100CB7530 /* TweetViewController.swift */,
-				8476C98A20EAA31A002E5063 /* AddTaskViewController.swift */,
+				844EB9E520F24C6300C30393 /* Views */,
+				84042D6F20EE5D7900CB7530 /* Models */,
+				84042D7420EE60F800CB7530 /* ViewControllers */,
 				8476C97920EA8CD9002E5063 /* Main.storyboard */,
+				84042D7720EEA07800CB7530 /* AttachmentCollectionViewCell.swift */,
 				84042D4720ED0A3200CB7530 /* TodoModel.xcdatamodeld */,
-				84042D6B20ED62C700CB7530 /* Todo.swift */,
 				8476C98C20EAAF50002E5063 /* ToDoTableViewCell.swift */,
 				8476C98820EA9B21002E5063 /* ToDoTask.swift */,
 				8476C98720EA8CE6002E5063 /* Supporting File */,
@@ -116,6 +158,7 @@
 		8476C96A20EA8CD8002E5063 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Admin;
@@ -150,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8476C98020EA8CD9002E5063 /* LaunchScreen.storyboard in Resources */,
+				844EB9E920F24C8900C30393 /* FormTableViewCell.xib in Resources */,
 				8476C97D20EA8CD9002E5063 /* Assets.xcassets in Resources */,
 				8476C97B20EA8CD9002E5063 /* Main.storyboard in Resources */,
 			);
@@ -163,12 +207,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				84042D6C20ED62C700CB7530 /* Todo.swift in Sources */,
+				844EB9E820F24C8900C30393 /* FormTableViewCell.swift in Sources */,
+				84042D7620EE611200CB7530 /* ContactsViewController.swift in Sources */,
 				8476C98920EA9B21002E5063 /* ToDoTask.swift in Sources */,
 				84042D4920ED0A3200CB7530 /* TodoModel.xcdatamodeld in Sources */,
 				8476C98B20EAA31A002E5063 /* AddTaskViewController.swift in Sources */,
-				84042D6E20ED653100CB7530 /* TweetViewController.swift in Sources */,
+				84042D7820EEA07900CB7530 /* AttachmentCollectionViewCell.swift in Sources */,
 				8476C97820EA8CD9002E5063 /* MainViewController.swift in Sources */,
+				84042D7320EE5DAD00CB7530 /* Attachment+Extension.swift in Sources */,
 				8476C97620EA8CD9002E5063 /* AppDelegate.swift in Sources */,
+				844EB9EB20F24D2900C30393 /* ProfileViewController.swift in Sources */,
+				84042D7120EE5D9700CB7530 /* Contacts+Extension.swift in Sources */,
 				8476C98D20EAAF50002E5063 /* ToDoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

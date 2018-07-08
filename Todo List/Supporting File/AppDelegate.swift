@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Contacts
  
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        print(NSPersistentContainer.defaultDirectoryURL())
         return true
     }
 
@@ -36,6 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        self.requestAccess { isGranted in
+            if isGranted {
+                self.saveContactIfNeeded()
+            }
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -87,7 +94,113 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
-
 }
 
+extension AppDelegate {
+    
+    func requestAccess(completionHandler: @escaping (_ accessGranted: Bool) -> Void) {
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+        case .authorized:
+            completionHandler(true)
+        case .denied:
+            showSettingsAlert(completionHandler)
+        case .restricted, .notDetermined:
+            CNContactStore().requestAccess(for: .contacts) { granted, error in
+                if granted {
+                    completionHandler(true)
+                } else {
+                    DispatchQueue.main.async {
+                        self.showSettingsAlert(completionHandler)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func showSettingsAlert(_ completionHandler: @escaping (_ accessGranted: Bool) -> Void) {
+        let alert = UIAlertController(title: nil, message: "This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { action in
+            completionHandler(false)
+            UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in
+            completionHandler(false)
+        })
+        //present(alert, animated: true)
+    }
+}
+
+extension AppDelegate {
+    
+    private func saveContactIfNeeded() {
+        
+        let contacts = Contacts.fetchContacts()
+        guard contacts.count == 0 else { return }
+        guard let phoneContacts = getContactsFromPhoneBook() else { return }
+        
+        let container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+        
+        container?.performBackgroundTask({ context in
+            for phoneContact in phoneContacts {
+                let _ = Contacts.createEntity(phoneContact: phoneContact, context: context)
+            }
+            do {
+                try context.save()
+                print("saved")
+            } catch {
+                print("\(error.localizedDescription)")
+            }
+        })
+        
+       
+    }
+    
+    private func getContactsFromPhoneBook() -> [CNContact]? {
+        
+        let contactStore = CNContactStore()
+        var contacts = [CNContact]()
+        let keys = [
+            CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
+            CNContactPhoneNumbersKey,
+            CNContactEmailAddressesKey
+            ] as [Any]
+        let request = CNContactFetchRequest(keysToFetch: keys as! [CNKeyDescriptor])
+        do {
+            try contactStore.enumerateContacts(with: request){
+                (contact, stop) in
+                // Array containing all unified contacts from everywhere
+                contacts.append(contact)
+                for phoneNumber in contact.phoneNumbers {
+                    if let number = phoneNumber.value as? CNPhoneNumber, let label = phoneNumber.label {
+                        let localizedLabel = CNLabeledValue<CNPhoneNumber>.localizedString(forLabel: label)
+                        print("\(contact.givenName) \(contact.familyName) tel:\(localizedLabel) -- \(number.stringValue), email: \(contact.emailAddresses)")
+                    }
+                }
+            }
+            return contacts
+        } catch {
+            print("unable to fetch contacts from phone")
+            return nil
+            
+        }
+    }
+}
+
+
+extension CNContact {
+    
+    var formattedPhoneNumber: [String]? {
+        get {
+            var numbers = [String]()
+            for phoneNumber in self.phoneNumbers {
+                
+                if let number = phoneNumber.value as? CNPhoneNumber, let label = phoneNumber.label {
+                    let localizedLabel = CNLabeledValue<CNPhoneNumber>.localizedString(forLabel: label)
+                    numbers.append("(\(localizedLabel)) -- (\(number.stringValue))")
+                }
+            }
+            return numbers
+        }
+    }
+    
+}

@@ -9,10 +9,9 @@
 import UIKit
 import CoreData
 
-class Todo: NSManagedObject {
+public class Todo: NSManagedObject {
 
     class func createTodoTask(with todoTask: ToDoTask, in context: NSManagedObjectContext) -> Todo {
-        
         
         let todo = Todo(context: context)
         todo.active = true
@@ -24,3 +23,4 @@ class Todo: NSManagedObject {
         return todo
     }
 }
+
