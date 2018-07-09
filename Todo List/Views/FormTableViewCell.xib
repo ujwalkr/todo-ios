@@ -19,29 +19,41 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tr7-Sa-B77">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUj-IP-y0q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5An-kV-AqY">
-                                <rect key="frame" x="106" y="6" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4md-Jd-JUA">
+                                <rect key="frame" x="8" y="8" width="304" height="27.5"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textChangeInTextField:" destination="KGk-i7-Jjw" eventType="editingChanged" id="Lfx-m6-mEA"/>
+                                    <action selector="textChangeInTextField:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="xVg-To-syk"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4md-Jd-JUA" firstAttribute="centerY" secondItem="OUj-IP-y0q" secondAttribute="centerY" id="bd8-EU-tuk"/>
+                            <constraint firstItem="4md-Jd-JUA" firstAttribute="leading" secondItem="OUj-IP-y0q" secondAttribute="leading" constant="8" id="bgT-uH-WFi"/>
+                            <constraint firstItem="4md-Jd-JUA" firstAttribute="top" secondItem="OUj-IP-y0q" secondAttribute="top" constant="8" id="fvv-nH-s1D"/>
+                            <constraint firstAttribute="trailing" secondItem="4md-Jd-JUA" secondAttribute="trailing" constant="8" id="h1L-CI-EdS"/>
+                            <constraint firstAttribute="bottom" secondItem="4md-Jd-JUA" secondAttribute="bottom" constant="8" id="oO7-S2-PnZ"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="tr7-Sa-B77" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5Te-OB-xeV"/>
-                    <constraint firstAttribute="trailing" secondItem="tr7-Sa-B77" secondAttribute="trailing" id="8IL-K1-ePB"/>
-                    <constraint firstItem="tr7-Sa-B77" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="buf-gp-SSO"/>
-                    <constraint firstAttribute="bottom" secondItem="tr7-Sa-B77" secondAttribute="bottom" id="cMa-4r-gt2"/>
+                    <constraint firstAttribute="bottom" secondItem="OUj-IP-y0q" secondAttribute="bottom" id="5FW-gN-Jo4"/>
+                    <constraint firstItem="OUj-IP-y0q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7Un-vE-4g0"/>
+                    <constraint firstItem="OUj-IP-y0q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="B4r-M5-ZNh"/>
+                    <constraint firstAttribute="trailing" secondItem="OUj-IP-y0q" secondAttribute="trailing" id="ONl-5S-2VS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="-175" y="27"/>
+            <connections>
+                <outlet property="formText" destination="4md-Jd-JUA" id="yF9-na-vZq"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

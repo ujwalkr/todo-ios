@@ -182,9 +182,8 @@ extension MainViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let profileViewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
-        self.present(profileViewController, animated: true, completion: nil)
-        
-        
+        let navigationController = UINavigationController(rootViewController: profileViewController)
+        self.navigationController?.present(navigationController, animated: true, completion: nil)
     }
 }
 

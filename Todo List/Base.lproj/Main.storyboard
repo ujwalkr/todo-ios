@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="todocell" rowHeight="80" id="Zdf-Ef-YR3" customClass="ToDoTableViewCell" customModule="Todo_List" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="todocell" rowHeight="80" id="Zdf-Ef-YR3" customClass="ToDoTableViewCell" customModule="Todo_List" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zdf-Ef-YR3" id="8rH-TD-IC5">
@@ -77,6 +77,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="a3b-PC-SzG">
+                        <barButtonItem key="leftBarButtonItem" image="ic_profile" id="hJ8-SA-3cL">
+                            <connections>
+                                <action selector="profileButtonActionWithSender:" destination="BYZ-38-t0r" id="g1Y-Eq-EbL"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="BWU-1d-vBK">
                             <connections>
                                 <segue destination="GF4-nr-3uA" kind="presentation" identifier="AddTask" id="ABR-aq-Pbr"/>
@@ -278,8 +283,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kMD-Lb-YsD">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Dnw-JC-ilf" id="9Xu-ph-Msn"/>
+                                    <outlet property="delegate" destination="Dnw-JC-ilf" id="jH1-MC-Dqm"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -291,13 +300,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="f0q-CJ-KZv"/>
                     </view>
+                    <navigationItem key="navigationItem" id="vTp-YG-w8O">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="9ED-xl-mzf">
+                            <connections>
+                                <action selector="doneAdding:" destination="Dnw-JC-ilf" id="peT-Oh-WsN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="kMD-Lb-YsD" id="QaM-Ig-9tB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nNZ-af-xeM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2230" y="397"/>
+            <point key="canvasLocation" x="2541" y="370"/>
         </scene>
         <!--Contacts View Controller-->
         <scene sceneID="YXP-rt-erY">
@@ -311,7 +327,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactCell" textLabel="6Kp-Sy-QCp" detailTextLabel="w0J-Kb-OoT" style="IBUITableViewCellStyleSubtitle" id="mWQ-5d-frp">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactCell" textLabel="6Kp-Sy-QCp" detailTextLabel="w0J-Kb-OoT" style="IBUITableViewCellStyleSubtitle" id="mWQ-5d-frp">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mWQ-5d-frp" id="hS3-9l-FlC">
@@ -420,8 +436,27 @@
             </objects>
             <point key="canvasLocation" x="3740" y="-375"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7fA-mv-hoT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o9c-HS-gsd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7U6-F2-vvz">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Dnw-JC-ilf" kind="relationship" relationship="rootViewController" id="qXq-5Y-Yth"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3pg-SH-KMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1721" y="369"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="ic_profile" width="20" height="20"/>
         <image name="plus" width="600" height="598"/>
     </resources>
     <inferredMetricsTieBreakers>
